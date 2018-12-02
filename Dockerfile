@@ -1,4 +1,9 @@
-FROM golang:1.11 as builder
+FROM golang:1.11-alpine as builder
+
+# Install SSL ca certificates.
+# Ca-certificates is required to call HTTPS endpoints.
+# musl-dev is needed for gcc
+RUN apk update && apk add --no-cache ca-certificates gcc musl-dev
 
 WORKDIR /build
 
@@ -13,6 +18,7 @@ RUN go test -v ./...
 
 # Bare minimum container
 FROM scratch
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 WORKDIR /app
 COPY --from=builder /build/main .
 
