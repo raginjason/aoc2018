@@ -1,0 +1,7 @@
+version: "3.7"
+services:
+  aoc2018:
+    build: .
+    image: aoc2018:${AOC_DAY:-latest}
+    volumes:
+      - ${HOME}/data/aoc2018:/data
