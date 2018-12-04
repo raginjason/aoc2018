@@ -57,7 +57,7 @@ func TestBoxProximity(t *testing.T) {
 		wantDiff int
 		wantSame string
 	}{
-		{"abcde", "axcyd", 2, "ace"},
+		{"abcde", "axcye", 2, "ace"},
 		{"fghij", "fguij", 1, "fgij"},
 	}
 
