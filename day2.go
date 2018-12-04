@@ -54,6 +54,14 @@ func day2() int {
 	return checksum
 }
 
+func day2pt2() string {
+	lines := scanDay2File()
+
+	answer := BoxSetProximity(lines...)
+
+	return answer
+}
+
 // BoxProximity calculate how close two boxes are
 func BoxProximity(boxA string, boxB string) (int, string) {
 	aRunes := []rune(boxA)
