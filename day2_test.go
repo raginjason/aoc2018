@@ -73,3 +73,21 @@ func TestBoxProximity(t *testing.T) {
 		})
 	}
 }
+
+func TestBoxSetProximity(t *testing.T) {
+	testCases := []struct {
+		boxIDs []string
+		want   string
+	}{
+		{[]string{"abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"}, "fgij"},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.boxIDs[0], func(t *testing.T) {
+			got := BoxSetProximity(tc.boxIDs...)
+			if got != tc.want {
+				t.Errorf("got %s; want %s", got, tc.want)
+			}
+		})
+	}
+}

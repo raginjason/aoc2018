@@ -70,3 +70,24 @@ func BoxProximity(boxA string, boxB string) (int, string) {
 	}
 	return diff, string(same)
 }
+
+// BoxSetProximity proximity of all the boxIDs
+func BoxSetProximity(boxIDs ...string) string {
+	var answer string
+
+	length := len(boxIDs)
+	var cycles int
+	log.Printf("length: %d\n", length)
+	for i := 0; i < length; i++ {
+		for j := i + 1; j < length; j++ {
+			cycles++
+			diff, same := BoxProximity(boxIDs[i], boxIDs[j])
+			if diff == 1 {
+				log.Printf("found after %d comparisons\n", cycles)
+				answer = same
+				return answer
+			}
+		}
+	}
+	return answer
+}
