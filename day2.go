@@ -1,5 +1,9 @@
 package main
 
+import (
+	"log"
+)
+
 // BoxLetterCount checksum helper
 func BoxLetterCount(boxID string) (int, int) {
 	seen := make(map[rune]int)
@@ -31,4 +35,21 @@ func BoxSetCount(boxIDs ...string) int {
 		thrice = thrice + b
 	}
 	return twice * thrice
+}
+
+func scanDay2File() []string {
+	lines, err := FileInput(2)
+	if err != nil {
+		log.Fatalf("failed to get data, %s", err)
+	}
+
+	return lines
+}
+
+func day2() int {
+	lines := scanDay2File()
+
+	checksum := BoxSetCount(lines...)
+
+	return checksum
 }
