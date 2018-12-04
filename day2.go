@@ -53,3 +53,20 @@ func day2() int {
 
 	return checksum
 }
+
+// BoxProximity calculate how close two boxes are
+func BoxProximity(boxA string, boxB string) (int, string) {
+	aRunes := []rune(boxA)
+	bRunes := []rune(boxB)
+
+	same := make([]rune, 0)
+	var diff int
+	for i := 0; i < len(aRunes); i++ {
+		if aRunes[i] == bRunes[i] {
+			same = append(same, aRunes[i])
+		} else {
+			diff++
+		}
+	}
+	return diff, string(same)
+}

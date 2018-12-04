@@ -49,3 +49,27 @@ func TestBoxSetCount(t *testing.T) {
 		})
 	}
 }
+
+func TestBoxProximity(t *testing.T) {
+	testCases := []struct {
+		boxA     string
+		boxB     string
+		wantDiff int
+		wantSame string
+	}{
+		{"abcde", "axcyd", 2, "ace"},
+		{"fghij", "fguij", 1, "fgij"},
+	}
+
+	for _, tc := range testCases {
+		t.Run(tc.boxA, func(t *testing.T) {
+			gotDiff, gotSame := BoxProximity(tc.boxA, tc.boxB)
+			if gotDiff != tc.wantDiff {
+				t.Errorf("got %d; want %d", gotDiff, tc.wantDiff)
+			}
+			if gotSame != tc.wantSame {
+				t.Errorf("got %s; want %s", gotSame, tc.wantSame)
+			}
+		})
+	}
+}
