@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"testing"
 )
 
@@ -32,6 +33,30 @@ func TestNewClaim(t *testing.T) {
 			}
 			if c.height != tc.want.height {
 				t.Errorf("got %d; want %d", c.height, tc.want.height)
+			}
+		})
+	}
+}
+
+func TestGrid(t *testing.T) {
+	testCases := []struct {
+		input string
+		want  Claim
+	}{
+		{"#1 @ 1,3: 4x4", Claim{claimID: 1, leftOffset: 1, topOffset: 3, width: 4, height: 4}},
+		{"#2 @ 3,1: 4x4", Claim{claimID: 2, leftOffset: 3, topOffset: 1, width: 4, height: 4}},
+		{"#3 @ 5,5: 2x2", Claim{claimID: 3, leftOffset: 5, topOffset: 5, width: 2, height: 2}},
+		{"#123 @ 3,2: 5x4", Claim{claimID: 123, leftOffset: 3, topOffset: 2, width: 5, height: 4}},
+	}
+
+	g := make([][]int, 0, 0)
+	for _, tc := range testCases {
+		t.Run(tc.input, func(t *testing.T) {
+			c := NewClaim(tc.input)
+			g = c.grid(g)
+			log.Printf("contents of claim %d (top: %d, height: %d, left: %d, width: %d)\n", c.claimID, c.topOffset, c.height, c.leftOffset, c.width)
+			for i := range g {
+				log.Printf("%v\n", g[i])
 			}
 		})
 	}

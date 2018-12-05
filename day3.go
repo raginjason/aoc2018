@@ -63,3 +63,26 @@ func NewClaim(line string) *Claim {
 
 	return c
 }
+
+func (c Claim) grid(g [][]int) [][]int {
+
+	if cap(g) < c.topOffset+c.height {
+		newSize := c.topOffset + c.height
+		newSlice := make([][]int, newSize, newSize)
+		copy(newSlice, g)
+		g = newSlice
+	}
+
+	for i := c.topOffset; i < c.topOffset+c.height; i++ {
+		if cap(g[i]) < c.leftOffset+c.width {
+			newSize := c.leftOffset + c.width
+			newSlice := make([]int, newSize, newSize)
+			copy(newSlice, g[i])
+			g[i] = newSlice
+		}
+		for j := c.leftOffset; j < c.leftOffset+c.width; j++ {
+			g[i][j]++
+		}
+	}
+	return g
+}
