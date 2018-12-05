@@ -99,3 +99,26 @@ func CountIntersection(g [][]int) int {
 	}
 	return count
 }
+
+func scanDay3File() []string {
+	lines, err := FileInput(3)
+	if err != nil {
+		log.Fatalf("failed to get data, %s", err)
+	}
+
+	return lines
+}
+
+func day3() int {
+	lines := scanDay3File()
+
+	grid := make([][]int, 0, 0)
+	for _, line := range lines {
+		claim := NewClaim(line)
+		grid = claim.grid(grid)
+	}
+
+	intersection := CountIntersection(grid)
+
+	return intersection
+}
