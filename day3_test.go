@@ -58,6 +58,25 @@ func TestGrid(t *testing.T) {
 			for i := range g {
 				log.Printf("%v\n", g[i])
 			}
+			log.Printf("%#v\n", g)
+		})
+	}
+}
+
+func TestCountIntersection(t *testing.T) {
+	testCases := []struct {
+		input [][]int
+		want  int
+	}{
+		{[][]int{[]int(nil), []int{0, 0, 0, 1, 1, 1, 1}, []int{0, 0, 0, 1, 1, 1, 1}, []int{0, 1, 1, 2, 2, 1, 1}, []int{0, 1, 1, 2, 2, 1, 1}, []int{0, 1, 1, 1, 1, 1, 1}, []int{0, 1, 1, 1, 1, 1, 1}}, 4},
+	}
+
+	for _, tc := range testCases {
+		t.Run("A", func(t *testing.T) {
+			got := CountIntersection(tc.input)
+			if got != tc.want {
+				t.Errorf("got %d; want %d", got, tc.want)
+			}
 		})
 	}
 }

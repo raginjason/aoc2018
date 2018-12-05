@@ -86,3 +86,16 @@ func (c Claim) grid(g [][]int) [][]int {
 	}
 	return g
 }
+
+// CountIntersection squares
+func CountIntersection(g [][]int) int {
+	var count int
+	for i := range g {
+		for j := range g[i] {
+			if g[i][j] > 1 {
+				count++
+			}
+		}
+	}
+	return count
+}
